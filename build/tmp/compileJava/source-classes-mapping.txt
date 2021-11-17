@@ -1,2 +1,2 @@
-kafkaProducer/KafkaProducerBasis.java
- kafkaProducer.KafkaProducerBasis
+igniteConnect/SingleIgniteConnect.java
+ igniteConnect.SingleIgniteConnect

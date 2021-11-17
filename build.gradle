@@ -23,6 +23,11 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
     compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
+
+    //ignite
+    implementation group: 'org.apache.ignite', name: 'ignite-core', version: '2.11.0'
+    implementation group: 'org.apache.ignite', name: 'ignite-spring', version: '2.11.0'
+
 }
 
 test {
