@@ -38,6 +38,7 @@ public class MainProcess {
         // data select
         igniteSqlDmlCommand.getSelectAll(cache, TABLE_NAME);
 
+        // ignite 종료
         igniteConnect.IgniteClose();
     }
 }
