@@ -1,8 +1,11 @@
 package com.karim.igniteBasis.igniteSqlCommand;
 
+import com.karim.igniteBasis.define.TableDefine;
 import com.karim.igniteBasis.igniteConnectCfg.IgniteLifeCycle;
 import com.karim.igniteBasis.igniteSqlCommand.ddlCommand.IgniteSqlDdlCommand;
 import com.karim.igniteBasis.igniteSqlCommand.dmlCommand.IgniteSqlDmlCommand;
+import com.karim.igniteBasis.igniteSqlCommand.dmlCommand.InsertCommand;
+import com.karim.igniteBasis.igniteSqlCommand.dmlCommand.SelectCommand;
 import org.apache.ignite.client.ClientCache;
 
 /**
@@ -11,9 +14,7 @@ import org.apache.ignite.client.ClientCache;
  * Time : 오후 6:00
  */
 public class MainProcess {
-
-    private static final String TABLE_NAME = "Mapping_Data";
-    private static final int INSERT_COUNT = 100000000;
+    private static String IGNITE_COMMAND_TEST_MODE = "thread";
 
     public static void main(String[] args) {
 
@@ -23,20 +24,34 @@ public class MainProcess {
 
         ClientCache<Object, Object> cache;
 
-        // 접속정보
-        cache = igniteConnect.IgniteConnect();
+        if (IGNITE_COMMAND_TEST_MODE.equals("thread")){
+            /**
+             * 2021-11-23
+             * 1. 1억건 insert
+             * 2. 1초마다 1건 랜덤 select
+             * */
 
-        // table create
-        igniteSqlDdlCommand.setCreateTable(cache, TABLE_NAME);
+            InsertCommand insertCommand = new InsertCommand();
+            SelectCommand selectCommand = new SelectCommand();
 
-        // data insert
-        igniteSqlDmlCommand.setInsertData(cache, TABLE_NAME, INSERT_COUNT);
+            insertCommand.start();
+            selectCommand.start();
+        }else {
+            // 접속정보
+            cache = igniteConnect.IgniteConnect();
 
-        // data update
-        igniteSqlDmlCommand.setUpdate(cache, TABLE_NAME);
+            // table create
+            igniteSqlDdlCommand.setCreateTable(cache, TableDefine.TABLE_NAME);
 
-        // data select
-        igniteSqlDmlCommand.getSelectAll(cache, TABLE_NAME);
+            // data insert
+            igniteSqlDmlCommand.setInsertData(cache, TableDefine.TABLE_NAME, TableDefine.INSERT_COUNT);
+
+            // data update
+            igniteSqlDmlCommand.setUpdate(cache, TableDefine.TABLE_NAME);
+
+            // data select
+            igniteSqlDmlCommand.getSelectAll(cache, TableDefine.TABLE_NAME);
+        }
 
         // ignite 종료
         igniteConnect.IgniteClose();

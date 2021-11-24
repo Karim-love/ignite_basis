@@ -10,6 +10,7 @@ import org.apache.ignite.client.ClientCache;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by sblim
@@ -44,9 +45,11 @@ public class IgniteSqlDmlCommand {
     }
 
     public void setInsertData(ClientCache cache, String table, int count){
+        long startTime;
+        long endTime;
 
         // insert 쿼리문 작성
-        for (int i=0; i<count; i++){
+        for (int i=1; i<count; i++){
             // 이름 랜덤 생성
             name = (List<String>) RandomDataCreateUtils.name();
             firstName = (List<String>) RandomDataCreateUtils.firstName();
@@ -54,10 +57,15 @@ public class IgniteSqlDmlCommand {
             String dmlQry = "INSERT INTO " + table + " (USERID, USERNAME, USERINT, USERDOUBLE) VALUES ('"+ i +"','"+ firstName.get(0)+name.get(0) +"',"+i+","+ i +".1)";
             SqlFieldsQuery qry = new SqlFieldsQuery(dmlQry);
 
+            startTime = System.currentTimeMillis();
             try {
                 cache.query(qry).getAll();
             }catch (Exception e){
-                sqlLogger.error("{} => {}", "ignite setInsertData exception", LoggerUtils.getStackTrace(e));
+                //sqlLogger.error("{} => {}", "ignite setInsertData exception", LoggerUtils.getStackTrace(e));
+            }
+            endTime = System.currentTimeMillis();
+            if ((i%1000000) == 0){
+                sqlLogger.info("count : " + count + "  end-start time (ms) : " + (endTime-startTime));
             }
         }
         System.out.println("END");
@@ -73,6 +81,29 @@ public class IgniteSqlDmlCommand {
             cache.query(qry).getAll();
         }catch (Exception e){
             sqlLogger.error("{} => {}", "ignite setUpdate exception", LoggerUtils.getStackTrace(e));
+        }
+    }
+
+    public void getRandomSelect(ClientCache cache, String table) {
+        List<?> resultList;
+        Random rand = new Random();
+        long startTime;
+        long endTime;
+        int random;
+
+        //select 쿼리문 작성
+        startTime = System.currentTimeMillis();
+        random = rand.nextInt(10000000);
+        SqlFieldsQuery qry = new SqlFieldsQuery("SELECT * FROM " + table + " WHERE USERID='" + random + "'");
+        endTime = System.currentTimeMillis();
+
+        try {
+            // 쿼리값 cache에 있는 데이터 전부 가져오기
+            resultList = cache.query(qry).getAll();
+            sqlLogger.info("resultList : " + resultList.get(0) + "  end-start time (ms) : " + (endTime-startTime));
+        } catch (Exception e) {
+            sqlLogger.info("resultList : " + random +" 없음" + "  end-start time (ms) : " + (endTime-startTime));
+
         }
     }
 }
