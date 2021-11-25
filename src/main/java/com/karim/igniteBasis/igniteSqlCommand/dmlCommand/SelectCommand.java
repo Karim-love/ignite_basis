@@ -18,7 +18,7 @@ public class SelectCommand extends Thread{
     public void run(){
         while (true){
             try {
-                Thread.sleep(1000);
+                Thread.sleep(5);
                 igniteSqlDmlCommand.getRandomSelect(cache, TableDefine.TABLE_NAME);
             } catch (InterruptedException e) {
                 e.printStackTrace();

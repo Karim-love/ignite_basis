@@ -48,8 +48,11 @@ public class IgniteSqlDmlCommand {
         long startTime;
         long endTime;
 
+        startTime = System.currentTimeMillis();
+        sqlLogger.info("insert start time : " + startTime);
+
         // insert 쿼리문 작성
-        for (int i=1; i<count; i++){
+        for (int i=1213609; i<count; i++){
             // 이름 랜덤 생성
             name = (List<String>) RandomDataCreateUtils.name();
             firstName = (List<String>) RandomDataCreateUtils.firstName();
@@ -57,7 +60,6 @@ public class IgniteSqlDmlCommand {
             String dmlQry = "INSERT INTO " + table + " (USERID, USERNAME, USERINT, USERDOUBLE) VALUES ('"+ i +"','"+ firstName.get(0)+name.get(0) +"',"+i+","+ i +".1)";
             SqlFieldsQuery qry = new SqlFieldsQuery(dmlQry);
 
-            startTime = System.currentTimeMillis();
             try {
                 cache.query(qry).getAll();
             }catch (Exception e){
@@ -65,7 +67,7 @@ public class IgniteSqlDmlCommand {
             }
             endTime = System.currentTimeMillis();
             if ((i%1000000) == 0){
-                sqlLogger.info("count : " + count + "  end-start time (ms) : " + (endTime-startTime));
+                sqlLogger.info("count : " + count + "  end time (ms) : " + (endTime));
             }
         }
         System.out.println("END");
@@ -89,21 +91,25 @@ public class IgniteSqlDmlCommand {
         Random rand = new Random();
         long startTime;
         long endTime;
+        long calcTime;
         int random;
 
         //select 쿼리문 작성
         startTime = System.currentTimeMillis();
         random = rand.nextInt(10000000);
         SqlFieldsQuery qry = new SqlFieldsQuery("SELECT * FROM " + table + " WHERE USERID='" + random + "'");
-        endTime = System.currentTimeMillis();
 
         try {
             // 쿼리값 cache에 있는 데이터 전부 가져오기
             resultList = cache.query(qry).getAll();
-            sqlLogger.info("resultList : " + resultList.get(0) + "  end-start time (ms) : " + (endTime-startTime));
+            endTime = System.currentTimeMillis();
+            calcTime = endTime-startTime;
+            if (resultList != null && resultList.size() > 0 && calcTime > 10){
+                sqlLogger.info("resultList : " + resultList.get(0) + "  end-start time (ms) : " + (endTime-startTime));
+            }
         } catch (Exception e) {
-            sqlLogger.info("resultList : " + random +" 없음" + "  end-start time (ms) : " + (endTime-startTime));
-
+            e.printStackTrace();
+            sqlLogger.error(e.toString());
         }
     }
 }
