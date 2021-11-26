@@ -1,6 +1,6 @@
 package com.karim.igniteBasis.igniteConnectCfg;
 
-import com.karim.igniteBasis.define.TableDefine;
+import com.karim.igniteBasis.utils.propertiesUtils;
 import org.apache.ignite.Ignition;
 import org.apache.ignite.client.ClientCache;
 import org.apache.ignite.client.ClientCluster;
@@ -18,26 +18,26 @@ public class IgniteLifeCycle {
     ClientConfiguration cfg;
     IgniteClient ignite;
 
+    String[] url;
+    String jdbcClusterUrl = "jdbc:ignite:thin://192.168.124.238:10800,192.168.124.244:10800,192.168.124.249:10800/PUBLIC";
+    String jdbcSingleUrl = "jdbc:ignite:thin://192.168.124.250:10800/PUBLIC";
+
     public void igniteCfg(){
 
-        if (TableDefine.CLIENT_CLUSTER_MODE){
-            // 접속정보
-            cfg = new ClientConfiguration()
-                    .setAddresses("192.168.124.238:10800","192.168.124.244:10800","192.168.124.249:10800")
-                    .setPartitionAwarenessEnabled(true);
+        url = propertiesUtils.getStringArray(propertiesUtils.urlParsing(jdbcSingleUrl));
 
-            ignite = Ignition.startClient(cfg);
+        // 접속정보
+        cfg = new ClientConfiguration()
+                .setAddresses(url)
+                .setPartitionAwarenessEnabled(true);
 
+        ignite = Ignition.startClient(cfg);
+
+        // url이 여러개면 cluster -> cluster 모드로
+        if (url.length > 1){
             ClientCluster clientCluster = ignite.cluster();
             clientCluster.state(ClusterState.ACTIVE);
 
-        }else {
-            // 접속정보
-            cfg = new ClientConfiguration()
-                    .setAddresses("192.168.124.250:10800")
-                    .setPartitionAwarenessEnabled(true);
-
-            ignite = Ignition.startClient(cfg);
         }
     }
 
@@ -57,4 +57,5 @@ public class IgniteLifeCycle {
             e.printStackTrace();
         }
     }
+
 }
