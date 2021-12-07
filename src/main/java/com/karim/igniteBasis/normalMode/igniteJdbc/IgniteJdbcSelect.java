@@ -1,4 +1,4 @@
-package com.karim.igniteBasis.igniteJdbc;
+package com.karim.igniteBasis.normalMode.igniteJdbc;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

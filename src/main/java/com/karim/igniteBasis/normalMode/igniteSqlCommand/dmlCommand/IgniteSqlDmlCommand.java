@@ -1,4 +1,4 @@
-package com.karim.igniteBasis.igniteSqlCommand.dmlCommand;
+package com.karim.igniteBasis.normalMode.igniteSqlCommand.dmlCommand;
 
 import ch.qos.logback.classic.Logger;
 import com.karim.igniteBasis.logger.SqlLogger;

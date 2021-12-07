@@ -1,11 +1,11 @@
-package com.karim.igniteBasis.igniteSqlCommand;
+package com.karim.igniteBasis.normalMode.igniteSqlCommand;
 
 import com.karim.igniteBasis.define.TableDefine;
-import com.karim.igniteBasis.igniteConnectCfg.IgniteLifeCycle;
-import com.karim.igniteBasis.igniteSqlCommand.ddlCommand.IgniteSqlDdlCommand;
-import com.karim.igniteBasis.igniteSqlCommand.dmlCommand.IgniteSqlDmlCommand;
-import com.karim.igniteBasis.igniteSqlCommand.dmlCommand.InsertCommand;
-import com.karim.igniteBasis.igniteSqlCommand.dmlCommand.SelectCommand;
+import com.karim.igniteBasis.normalMode.igniteConnectCfg.IgniteLifeCycle;
+import com.karim.igniteBasis.normalMode.igniteSqlCommand.ddlCommand.IgniteSqlDdlCommand;
+import com.karim.igniteBasis.normalMode.igniteSqlCommand.dmlCommand.IgniteSqlDmlCommand;
+import com.karim.igniteBasis.normalMode.igniteSqlCommand.dmlCommand.InsertCommand;
+import com.karim.igniteBasis.normalMode.igniteSqlCommand.dmlCommand.SelectCommand;
 import org.apache.ignite.client.ClientCache;
 
 /**

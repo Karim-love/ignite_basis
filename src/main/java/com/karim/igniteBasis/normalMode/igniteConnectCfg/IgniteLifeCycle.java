@@ -1,4 +1,4 @@
-package com.karim.igniteBasis.igniteConnectCfg;
+package com.karim.igniteBasis.normalMode.igniteConnectCfg;
 
 import com.karim.igniteBasis.utils.propertiesUtils;
 import org.apache.ignite.Ignition;

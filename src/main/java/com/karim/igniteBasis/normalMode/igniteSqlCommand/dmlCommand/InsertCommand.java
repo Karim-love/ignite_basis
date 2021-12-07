@@ -1,7 +1,7 @@
-package com.karim.igniteBasis.igniteSqlCommand.dmlCommand;
+package com.karim.igniteBasis.normalMode.igniteSqlCommand.dmlCommand;
 
 import com.karim.igniteBasis.define.TableDefine;
-import com.karim.igniteBasis.igniteConnectCfg.IgniteLifeCycle;
+import com.karim.igniteBasis.normalMode.igniteConnectCfg.IgniteLifeCycle;
 import org.apache.ignite.client.ClientCache;
 
 /**
