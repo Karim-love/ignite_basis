@@ -13,7 +13,7 @@ import org.apache.ignite.configuration.ClientConfiguration;
  * Date : 2021-11-17
  * Time : 오후 2:16
  */
-public class IgniteLifeCycle {
+public class IgniteLifeCycleUtils {
 
     ClientConfiguration cfg;
     IgniteClient ignite;

@@ -1,7 +1,7 @@
 package com.karim.igniteBasis.normalMode.igniteSqlCommand;
 
 import com.karim.igniteBasis.define.TableDefine;
-import com.karim.igniteBasis.normalMode.igniteConnectCfg.IgniteLifeCycle;
+import com.karim.igniteBasis.normalMode.igniteConnectCfg.IgniteLifeCycleUtils;
 import com.karim.igniteBasis.normalMode.igniteSqlCommand.ddlCommand.IgniteSqlDdlCommand;
 import com.karim.igniteBasis.normalMode.igniteSqlCommand.dmlCommand.IgniteSqlDmlCommand;
 import com.karim.igniteBasis.normalMode.igniteSqlCommand.dmlCommand.InsertCommand;
@@ -20,7 +20,7 @@ public class MainProcess {
 
         IgniteSqlDmlCommand igniteSqlDmlCommand = new IgniteSqlDmlCommand();
         IgniteSqlDdlCommand igniteSqlDdlCommand = new IgniteSqlDdlCommand();
-        IgniteLifeCycle igniteConnect = new IgniteLifeCycle();
+        IgniteLifeCycleUtils igniteConnect = new IgniteLifeCycleUtils();
 
         ClientCache<Object, Object> cache;
 

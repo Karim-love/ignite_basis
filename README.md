@@ -19,7 +19,7 @@ ignite의 기본 동작에 대해 pkg별로 구현한 프로젝트입니다.
 ## 2. define
 - 공통 정의 변수 모음
 
-## 3. normalMode
+## 3. normalMode (Thin Client 로 구현)
 
 3-1. igniteConnectCfg
 - ignite 접속 및 종료 기능 구현
@@ -31,7 +31,7 @@ ignite의 기본 동작에 대해 pkg별로 구현한 프로젝트입니다.
 3-3. IgniteJdbcSelect
 - ignite jdbc 구현
 
-## 4. clientMode
+## 4. clientMode (Thick Client 로 구현)
 > 서버단에 개별 설치된 ignite에 클러스터 처럼 연결하는 모드 따라서 Cluster 모드여야 함
 
 4-1. igniteConnectClientModeCfg

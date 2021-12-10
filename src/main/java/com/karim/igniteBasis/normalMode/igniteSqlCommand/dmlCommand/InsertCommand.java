@@ -1,7 +1,7 @@
 package com.karim.igniteBasis.normalMode.igniteSqlCommand.dmlCommand;
 
 import com.karim.igniteBasis.define.TableDefine;
-import com.karim.igniteBasis.normalMode.igniteConnectCfg.IgniteLifeCycle;
+import com.karim.igniteBasis.normalMode.igniteConnectCfg.IgniteLifeCycleUtils;
 import org.apache.ignite.client.ClientCache;
 
 /**
@@ -11,7 +11,7 @@ import org.apache.ignite.client.ClientCache;
  */
 public class InsertCommand extends Thread{
     IgniteSqlDmlCommand igniteSqlDmlCommand = new IgniteSqlDmlCommand();
-    IgniteLifeCycle igniteConnect = new IgniteLifeCycle();
+    IgniteLifeCycleUtils igniteConnect = new IgniteLifeCycleUtils();
 
     ClientCache<Object, Object> cache = igniteConnect.IgniteConnect();
 
