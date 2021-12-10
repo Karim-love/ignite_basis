@@ -28,6 +28,9 @@ dependencies {
     implementation group: 'org.apache.ignite', name: 'ignite-core', version: '2.11.0'
     implementation group: 'org.apache.ignite', name: 'ignite-spring', version: '2.11.0'
 
+    // guava cache
+    implementation group: 'com.google.guava', name: 'guava', version: '31.0.1-jre'
+
 }
 
 test {

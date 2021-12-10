@@ -36,3 +36,14 @@ ignite의 기본 동작에 대해 pkg별로 구현한 프로젝트입니다.
 
 4-1. igniteConnectClientModeCfg
 - ignite 자바 Thin Client 구현
+
+## 5. instance
+- tps 측정 하기 위한 cacheCommon -> Google.Guava 이용하여 구현  
+- 데이터가 들어오는 곳에서 해당 인스턴스에 put 하면 됨
+```java
+CacheCommon.getInstance().put(UUID.randomUUID().toString(), "");
+```
+- tps 모니터를 확인 하기 위해서는 해당 인스턴스에 getTpsSize 를 스케줄러로 뿌려주면 됨
+```java
+logger.info("{} => {}" ,"[IGNITE_BASIS_TPS_MONITOR]", CacheCommon.getInstance().getTpsSize());
+```
