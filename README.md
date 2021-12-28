@@ -35,7 +35,7 @@ ignite의 기본 동작에 대해 pkg별로 구현한 프로젝트입니다.
 > 서버단에 개별 설치된 ignite에 클러스터 처럼 연결하는 모드 따라서 Cluster 모드여야 함
 
 4-1. igniteConnectClientModeCfg
-- ignite 자바 Thin Client 구현
+- ignite 자바 Thick Client 구현
 
 ## 5. instance
 - tps 측정 하기 위한 cacheCommon -> Google.Guava 이용하여 구현  

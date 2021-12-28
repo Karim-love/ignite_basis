@@ -38,8 +38,8 @@
                 <property name="ipFinder">
                     <bean class="org.apache.ignite.spi.discovery.tcp.ipfinder.vm.TcpDiscoveryVmIpFinder">
                         <property name="addresses">
-                            <list>
-                                <value>192.168.124.250:39432</value>
+                            <list> <!--network card : eno1 -->
+                                <value>127.0.0.1:39543</value>
                             </list>
                         </property>
                     </bean>
@@ -49,10 +49,27 @@
 
 
 
-        <property name="communicationSpi">
-            <bean class="org.apache.ignite.spi.communication.tcp.TcpCommunicationSpi">
-                <property name="slowClientQueueLimit" value="1000"/>
-            </bean>
-        </property>
+<!--        연결 시간 초과-->
+<!--        1. 서버 노드의 기본 네트워크 작업에 대한 시간 초과-->
+<!--        2. 클라이언트 노드의 기본 네트워크 작업에 대한 시간 초과-->
+<!--        <property name="failureDetectionTimeout" value="800"/>-->
+<!--        <property name="clientFailureDetectionTimeout" value="5000"/>-->
+
+
+
+<!--        클라이언트 노드가 NAT 뒤에 배치되면 통신 프로토콜의 제한으로 인해 서버 노드가 클라이언트와 연결을 설정할 수 없습니다.-->
+<!--        여기에는 클라이언트 노드가 가상 환경(예: Kubernetes)에서 실행되고 서버 노드가 다른 곳에 배포되는 배포 사례가 포함됩니다.-->
+<!--        <property name="communicationSpi">-->
+<!--            <bean class="org.apache.ignite.spi.communication.tcp.TcpCommunicationSpi">-->
+<!--                <property name="forceClientToServerConnections" value="true"/>-->
+<!--            </bean>-->
+<!--        </property>-->
+
+
+<!--        <property name="communicationSpi">-->
+<!--            <bean class="org.apache.ignite.spi.communication.tcp.TcpCommunicationSpi">-->
+<!--                <property name="slowClientQueueLimit" value="1000"/>-->
+<!--            </bean>-->
+<!--        </property>-->
     </bean>
 </beans>
