@@ -1,11 +1,11 @@
 # 📃 ignite 기본 코드들
 ```
 >> ignite gradle version
-ignite : 2.11.0
+ignite : 2.16.0
 
 >> 구축 ignite version
-single-ignite : 2.11.0
-cluster-ignite : 2.11.0
+single-ignite : 2.16.0
+cluster-ignite : 2.16.0
 ```
 
 ## ❓ ignite 동작에 대한 기본 기능
@@ -47,3 +47,7 @@ CacheCommon.getInstance().put(UUID.randomUUID().toString(), "");
 ```java
 logger.info("{} => {}" ,"[IGNITE_BASIS_TPS_MONITOR]", CacheCommon.getInstance().getTpsSize());
 ```
+
+## 6. localCacheMode
+- 서버 단 Local Cache 로 싱글 및 클러스터 구현
+- cache 작업 시 이벤트 리스터 구현
