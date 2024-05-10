@@ -1,7 +1,6 @@
 package com.karim.igniteBasis.localCacheMode.cluster;
 
 import org.apache.ignite.events.CacheEvent;
-import org.apache.ignite.events.EventType;
 import org.apache.ignite.lang.IgnitePredicate;
 
 /**
@@ -17,14 +16,6 @@ public class RemoteListener implements IgnitePredicate<CacheEvent> {
 
     @Override
     public boolean apply(CacheEvent event) {
-
-        if ( event.type() == EventType.EVT_CACHE_OBJECT_PUT){
-            System.out.println("sblim remote server data put data = " +  event.newValue() );
-        }
-
-        if ( event.type() == EventType.EVT_CACHE_OBJECT_READ) {
-            System.out.println("sblim remote server data get data = " + event.newValue());
-        }
 
         return true;
     }

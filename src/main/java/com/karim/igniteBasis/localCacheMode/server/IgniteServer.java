@@ -28,8 +28,7 @@ import static org.apache.ignite.events.EventType.*;
  * @description :
  **/
 public class IgniteServer {
-    
-    private static final boolean singleCache = true;
+    private static final boolean singleCache = false;
     private static volatile IgniteServer _instance = null;
     private final static String CACHE_NAME = "SUBIN-Cache";
 
@@ -59,7 +58,7 @@ public class IgniteServer {
         IgniteConfiguration igniteCfg = new IgniteConfiguration();
         // 사용할 이벤트 타입 적용
         igniteCfg.setIncludeEventTypes(EventType.EVT_CACHE_OBJECT_PUT, EventType.EVT_CACHE_OBJECT_READ,
-                                       EventType.EVT_CACHE_OBJECT_REMOVED, EventType.EVT_NODE_JOINED, EventType.EVT_NODE_LEFT);
+                EventType.EVT_CACHE_OBJECT_REMOVED, EventType.EVT_NODE_JOINED, EventType.EVT_NODE_LEFT);
 
         // 캐시 설정
         CacheConfiguration<Integer, String> cacheCfg = new CacheConfiguration<>(CACHE_NAME);
@@ -126,7 +125,7 @@ public class IgniteServer {
     public void getDate() {
 
         // 캐시에서 데이터 검색
-        System.out.println("Value for key 1: " + igniteCache.get(1));
-        System.out.println("Value for key 2: " + igniteCache.get(2));
+        System.out.println("get value for key = " + igniteCache.get(1));
+        System.out.println("get value for key = " + igniteCache.get(2));
     }
 }

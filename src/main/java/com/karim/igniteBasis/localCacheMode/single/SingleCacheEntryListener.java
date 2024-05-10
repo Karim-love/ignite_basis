@@ -15,15 +15,16 @@ import org.apache.ignite.lang.IgnitePredicate;
  **/
 public class SingleCacheEntryListener implements IgnitePredicate<CacheEvent> {
 
+
     @Override
     public boolean apply(CacheEvent event) {
 
         if ( event.type() == EventType.EVT_CACHE_OBJECT_PUT){
-            System.out.println("sblim single server data put data = " +  event.newValue() );
+            System.out.println("sblim SingleCacheEntryListener data put data = " +  event.newValue());
         }
 
         if ( event.type() == EventType.EVT_CACHE_OBJECT_READ) {
-            System.out.println("sblim single server data get data = " + event.newValue());
+            System.out.println("sblim SingleCacheEntryListener data get data = " +  event.newValue());
         }
 
         // 이벤트 처리 후 계속 리스닝

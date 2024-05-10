@@ -1,6 +1,7 @@
 package com.karim.igniteBasis.localCacheMode.cluster;
 
 import org.apache.ignite.events.CacheEvent;
+import org.apache.ignite.events.EventType;
 import org.apache.ignite.lang.IgniteBiPredicate;
 
 import java.util.UUID;
@@ -15,14 +16,19 @@ import java.util.UUID;
  * @description :
  **/
 
-/**
- * 이중화 일 시 local event도 remoteListener에 이벤트로 작용됨
- * 따라서 localListener는 객체만 생성하고 리스닝중으로만 상태 적용
- */
 public class LocalListener implements IgniteBiPredicate<UUID, CacheEvent> {
 
     @Override
     public boolean apply(UUID uuid, CacheEvent event) {
+
+        if ( event.type() == EventType.EVT_CACHE_OBJECT_PUT){
+
+            System.out.println("sblim LocalListener data put data = " +  event.newValue());
+        }
+
+        if ( event.type() == EventType.EVT_CACHE_OBJECT_READ) {
+            System.out.println("sblim LocalListener data get data = " +  event.newValue());
+        }
 
         // 이벤트 처리 후 계속 리스닝
         return true;
